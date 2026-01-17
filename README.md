@@ -129,6 +129,7 @@ Minimal payload fields:
   "algorithm": "SHA256withRSA"
 }
 ```
+Narrative: https://www.novatechflow.com/2026/01/iot-device-manufacturing-needs.html
 
 ToDo:
 - include LetsEncrypt certificates
