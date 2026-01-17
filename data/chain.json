@@ -1,0 +1,8 @@
+[ {
+  "index" : 0,
+  "previousHash" : "0",
+  "data" : "Genesis block",
+  "proofOfWork" : 0,
+  "timestamp" : 1768656405722,
+  "hash" : "74b6cd3fb169892e9e769301386ac703c4c9b06c4f393b1460f512f9de4f6075"
+} ]

@@ -2,11 +2,12 @@
   "deviceId": "device-123",
   "owner": "operator-xyz",
   "timestamp": "2026-01-17T10:00:00Z",
-  "publicKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAplJ+FXR8Nl1kqw6j8C9reu0SJYQ2NCuf7oVIFCpYhAheTktgt6N95KxxcnwADFNmeJcDkBXs0E3t1lEOBMYclzR6w5LtpA4TSqgy8gjOgH6iQ7O6uxlE2iajo5dXWMGoIMI4L+mxYdeLrwZXD9V7ncQlOjuBghKAG8dWICCiJ8FiFOowMe3I/Fy+PizkMs3u7dQWuliYDhfZmrN5DE0wR61u8b612jpnUEe+uBxd4wsnBdDGB14SUY+q3x7AEOBBtFpUqlc9bXABXm5ssMiWYyGiIhnTIlf2ubkEouC4z8gpeh0BHM38Es55vsD4eWKy8+HCNVgpCqGJznunuJnXnwIDAQAB",
-  "signature": "kteOn9OY5Sk+M9MP2GZo5to6pYhk4EVPYff2GRtqmoFZVbOoYDDqNPqKzw+O0SRvptK01IA3yar88Fvg3cT4pRGl0pIwNvNpz5FH1TrwvrL6Is/IHeRIct0T82AaKxcAx8JtS/1qOOi01m64laRm4eIqU5vFgBpNsszfsOUwbyuFIh2wYxrzjkbwXE9LNZRQPhwUdK40gfvfn9d7b0oZVbECi2yB8j+QT3Mk7LNRLvv8vasN56LntXUduqvys2Yg+0vd6el/hoW6c5rsAwzw3KI89C+Uz/XbZfEeUEF6d4gYgawcVnNdLfZmjrytusfu5VBDmPg1G8CsmV+gqpO3HA==",
+  "publicKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzA6zOPdjBEKS3AQmOd9Vn3KCsDf+NzGb5fcC+Mmt/cfN1dU+jFQeVkhunnjs1ds7K7a+fLBUuhvHRXWXyaDkf++yIppJevuPqaPnALV5teKq2qilFtEsaDZerDHlGdHSp/o4eyaFxMqLMsPH73gHk+ylyPgr/0k5+Vpne+TY9LDUZKVjKaEdTqpth/WKeCuS4Oi2P1xaVVE8ihYkxi+fRhUukRz+SWX3Aa8ymzDkLfZXC+C5AOWuzKBX7bdww0pon1ObKaZMwp8akvm0jpY2N3cV9JKPqDaNmvEmXIw4jxxmf7QgtuQRFpxHdUYXmIQRsAzoQVnTxRq4Q33fsdDM1wIDAQAB",
+  "signature": "ZLOJxk8A8ANmmL4Pf9xUWBLdNn+6AAVXL8Pp3mZ4ll3ksSPGBhh5D8ljYBjxe/yWrgKlcnBZIq3iEX4Oe//n/c6uLzypY1VecIIfeOBH2jpm++0gGNlBxigXY5saw65/gki4PcqJDu6a/gAnaoEE9JLV/1+S35k3C7wX+4Ij+9XL/p8bSnwyD8WY0Qo0Nw05B/qpZUpvOo77SzU9fRBbdob4D6V+earyx4ZyZ2CG0ZZAHBE7n/RuzJZ2kKyZQn1ChGyDkrwz4C/DpIKIknoX21SyFH7GvDaTlfkVKrsCvkxlszwqk7SMxOj6yBgpnetwtWy+PJsPe7YD0jb0SPFHEA==",
   "firmwareHash": "sha256:deadbeef",
   "buildId": "yocto-2026-01-17",
   "recipe": "core-image-minimal",
   "boardRev": "rev-a",
+  "nonce": "demo-nonce",
   "algorithm": "SHA256withRSA"
 }

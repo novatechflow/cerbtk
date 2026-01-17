@@ -1,5 +1,6 @@
 package registry.cerbtk
 
+import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import java.nio.file.Files
 import java.nio.file.Path
@@ -13,15 +14,21 @@ object Blockchain {
     private val storagePath: Path by lazy {
         Paths.get(System.getProperty("cerbtk.storagePath", "data/chain.json"))
     }
+    private val indexPath: Path by lazy {
+        Paths.get(System.getProperty("cerbtk.indexPath", "data/device_index.json"))
+    }
     private val mapper = jacksonObjectMapper()
     private val chainLock = Any()
+    private val deviceIndex = mutableMapOf<String, String>()
 
     val chain = mutableListOf<Block>()
     val latestBlock: Block
         get() = chain.last()
 
     init {
-        chain.addAll(loadChain())
+        val loadedChain = loadChain()
+        chain.addAll(loadedChain)
+        deviceIndex.putAll(loadIndex(loadedChain))
     }
 
     fun mineBlock(data: String): Block {
@@ -35,6 +42,18 @@ object Blockchain {
 
     fun findBlockByHash(hash: String): Block? =
         chain.firstOrNull { it.hash == hash }
+
+    fun findBlockByDeviceId(deviceId: String): Block? {
+        val hash = deviceIndex[deviceId] ?: return null
+        return findBlockByHash(hash)
+    }
+
+    fun indexDevice(deviceId: String, blockHash: String) {
+        synchronized(chainLock) {
+            deviceIndex[deviceId] = blockHash
+            persistIndex(deviceIndex)
+        }
+    }
 
     fun isChainValid(): Boolean {
         if (chain.isEmpty()) return false
@@ -74,6 +93,7 @@ object Blockchain {
     fun resetForTest() {
         chain.clear()
         chain.add(genesisBlock())
+        deviceIndex.clear()
     }
 
     private fun addNewBlock(block: Block) {
@@ -142,5 +162,48 @@ object Blockchain {
         val parent = storagePath.parent
         if (parent != null) Files.createDirectories(parent)
         mapper.writerWithDefaultPrettyPrinter().writeValue(storagePath.toFile(), blocks)
+    }
+
+    private fun loadIndex(blocks: List<Block>): Map<String, String> {
+        if (!storageEnabled) return buildIndexFromChain(blocks)
+
+        if (Files.exists(indexPath)) {
+            return try {
+                val typeRef = object : TypeReference<Map<String, String>>() {}
+                mapper.readValue(indexPath.toFile(), typeRef)
+            } catch (ex: Exception) {
+                buildIndexFromChain(blocks)
+            }
+        }
+
+        val built = buildIndexFromChain(blocks)
+        persistIndex(built)
+        return built
+    }
+
+    private fun buildIndexFromChain(blocks: List<Block>): Map<String, String> {
+        val index = mutableMapOf<String, String>()
+        blocks.forEach { block ->
+            val deviceId = extractDeviceId(block.data)
+            if (!deviceId.isNullOrBlank()) {
+                index[deviceId] = block.hash
+            }
+        }
+        return index
+    }
+
+    private fun extractDeviceId(payload: String): String? {
+        return try {
+            mapper.readValue(payload, SignedRegistrationPayload::class.java).deviceId
+        } catch (ex: Exception) {
+            null
+        }
+    }
+
+    private fun persistIndex(index: Map<String, String>) {
+        if (!storageEnabled) return
+        val parent = indexPath.parent
+        if (parent != null) Files.createDirectories(parent)
+        mapper.writerWithDefaultPrettyPrinter().writeValue(indexPath.toFile(), index)
     }
 }

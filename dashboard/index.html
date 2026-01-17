@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Cerbtk demo dashboard for IoT device registry and assembly audit." />
+    <title>Cerbtk Assembly Console</title>
+    <link rel="stylesheet" href="/dashboard/styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div>
+          <p class="kicker">Novatechflow - Cerbtk</p>
+          <h1>Assembly Console</h1>
+          <p class="subtitle">
+            Demo dashboard for signing, registering, and auditing critical-infra IoT devices.
+          </p>
+          <div class="hero-actions">
+            <label class="field">
+              <span>Base URL</span>
+              <input id="baseUrl" type="url" value="http://localhost:23230" />
+            </label>
+            <div class="toggle-group">
+              <button id="modeDemo" class="pill active" type="button">Demo mode</button>
+              <button id="modeLive" class="pill" type="button">Live mode</button>
+            </div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="status-row">
+            <span class="label">Chain status</span>
+            <span id="chainStatus" class="status ok">Waiting</span>
+          </div>
+          <div class="meta-grid">
+            <div>
+              <p class="label">Head</p>
+              <p id="chainHead" class="value">--</p>
+            </div>
+            <div>
+              <p class="label">Anchor</p>
+              <p id="chainAnchor" class="value">--</p>
+            </div>
+          </div>
+          <div class="hero-buttons">
+            <button id="btnRefresh" class="btn primary" type="button">Refresh</button>
+            <button id="btnValidate" class="btn ghost" type="button">Validate</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="dashboard-grid">
+        <div class="column">
+          <section class="panel">
+          <div class="panel-header">
+            <h2>Register device</h2>
+            <div class="panel-actions">
+              <button id="btnSample" class="btn tiny ghost" type="button">Load sample</button>
+              <button id="btnSubmit" class="btn tiny primary" type="button">Submit</button>
+            </div>
+          </div>
+          <label class="field">
+            <span>Signed payload</span>
+            <textarea id="payloadInput" rows="14"></textarea>
+          </label>
+          <p class="hint">Signature must cover deviceId|owner|timestamp|firmwareHash|buildId|recipe|boardRev|nonce.</p>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <h2>Assembly timeline</h2>
+              <div class="panel-actions">
+              <span id="timelineMode" class="chip">Demo feed</span>
+              </div>
+            </div>
+            <div id="timeline" class="timeline"></div>
+          </section>
+        </div>
+
+        <div class="column">
+          <section class="panel">
+          <div class="panel-header">
+            <h2>Device lookup</h2>
+            <div class="panel-actions">
+              <button id="btnLookupHash" class="btn tiny" type="button">Lookup by hash</button>
+              <button id="btnLookupId" class="btn tiny ghost" type="button">Lookup by device ID</button>
+            </div>
+          </div>
+          <label class="field">
+            <span>Hash</span>
+            <input id="hashInput" type="text" placeholder="block hash" />
+          </label>
+          <label class="field">
+            <span>Device ID</span>
+            <input id="deviceIdInput" type="text" placeholder="device-123" />
+          </label>
+          </section>
+
+          <section class="panel">
+          <div class="panel-header">
+            <h2>Nonce challenge</h2>
+            <div class="panel-actions">
+              <button id="btnNonce" class="btn tiny primary" type="button">Request nonce</button>
+            </div>
+          </div>
+          <label class="field">
+            <span>Device ID</span>
+            <input id="nonceDeviceId" type="text" placeholder="device-123" />
+          </label>
+          <div class="nonce-box">
+            <p class="label">Nonce</p>
+            <p id="nonceValue" class="value">--</p>
+            <p id="nonceExpiry" class="hint">expires: --</p>
+          </div>
+          </section>
+
+          <section class="panel">
+          <div class="panel-header">
+            <h2>Latest response</h2>
+            <div class="panel-actions">
+              <button id="btnClear" class="btn tiny ghost" type="button">Clear</button>
+            </div>
+          </div>
+          <pre id="responseOutput" class="output">{}</pre>
+          </section>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <p>Built for the cerbtk demo - switch to Live mode to call your local API.</p>
+      </footer>
+    </div>
+    <script src="/dashboard/app.js"></script>
+  </body>
+</html>

@@ -9,7 +9,8 @@ mkdir -p "$CONFIG_DIR"
 openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out "$CONFIG_DIR/sample_private.pem"
 openssl pkey -in "$CONFIG_DIR/sample_private.pem" -pubout -outform DER | base64 > "$CONFIG_DIR/sample_public.der.b64"
 
-MESSAGE="device-123|operator-xyz|2026-01-17T10:00:00Z|sha256:deadbeef|yocto-2026-01-17|core-image-minimal|rev-a"
+NONCE="demo-nonce"
+MESSAGE="device-123|operator-xyz|2026-01-17T10:00:00Z|sha256:deadbeef|yocto-2026-01-17|core-image-minimal|rev-a|$NONCE"
 printf '%s' "$MESSAGE" > "$CONFIG_DIR/sample_message.txt"
 
 openssl dgst -sha256 -sign "$CONFIG_DIR/sample_private.pem" -out "$CONFIG_DIR/sample_signature.bin" "$CONFIG_DIR/sample_message.txt"
@@ -29,6 +30,7 @@ cat > "$CONFIG_DIR/sample_payload.json" <<PAYLOAD
   "buildId": "yocto-2026-01-17",
   "recipe": "core-image-minimal",
   "boardRev": "rev-a",
+  "nonce": "$NONCE",
   "algorithm": "SHA256withRSA"
 }
 PAYLOAD

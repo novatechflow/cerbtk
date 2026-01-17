@@ -15,6 +15,7 @@ data class SignedRegistrationPayload(
     val buildId: String? = null,
     val recipe: String? = null,
     val boardRev: String? = null,
+    val nonce: String? = null,
     val algorithm: String? = null
 )
 
@@ -41,7 +42,8 @@ fun verifySignedPayload(payload: SignedRegistrationPayload): Boolean {
 fun canonicalMessage(payload: SignedRegistrationPayload): String =
     payload.deviceId + "|" + payload.owner + "|" + payload.timestamp + "|" +
         (payload.firmwareHash ?: "") + "|" + (payload.buildId ?: "") + "|" +
-        (payload.recipe ?: "") + "|" + (payload.boardRev ?: "")
+        (payload.recipe ?: "") + "|" + (payload.boardRev ?: "") + "|" +
+        (payload.nonce ?: "")
 
 private fun loadTrustedKeys(algorithm: String): List<java.security.PublicKey> {
     val path = System.getProperty("cerbtk.trustedKeysPath", "config/trusted_keys.txt")
