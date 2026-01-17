@@ -26,9 +26,9 @@
     -->
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.infinimesh.registry</groupId>
-    <artifactId>Infinimesh-Device-Registry</artifactId>
-    <version>1.0</version>
+    <groupId>com.novatechflow.cerbtk</groupId>
+    <artifactId>cerbtk</artifactId>
+    <version>0.1.0</version>
 
     <properties>
         <kotlin.version>1.6.0</kotlin.version>
@@ -102,6 +102,7 @@
                                     <mainClass>registry.cerbtk.DeviceRegKt</mainClass>
                                 </manifest>
                             </archive>
+                            <finalName>cerbtk</finalName>
                             <descriptorRefs>
                                 <descriptorRef>jar-with-dependencies</descriptorRef>
                             </descriptorRefs>
