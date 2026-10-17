@@ -1,5 +1,5 @@
 # cerbtk - simple device registry
-Demo: IoT device registry for critical infrastructure, built with Kotlin and a simple blockchain log. Supposed as PoC (see credits).
+Demo: IoT device registry for critical infrastructure, built with Kotlin and a simple blockchain log. Built as a proof of concept (see credits).
 
 ## Threat model and assembly flow
 
@@ -164,7 +164,9 @@ Minimal payload fields:
   "algorithm": "SHA256withRSA"
 }
 ```
-Narrative: https://www.novatechflow.com/2026/01/iot-device-manufacturing-needs.html
+Background: [IoT Device Manufacturing Needs Verifiable Assembly Records](https://www.novatechflow.com/2026/01/iot-device-manufacturing-needs.html)
+
+After a device leaves the assembly line, its identity lands in a device registry such as [infinimesh](https://infinimesh.org), an open source IoT platform with a registry, device shadow and MQTT bridge.
 
 ## Credit
 
@@ -174,3 +176,10 @@ This project uses some open source libraries:
 * [Jackson Module Kotlin](https://github.com/FasterXML/jackson-module-kotlin)
 * based on code of [Adrian Marszałek](https://github.com/adikm/kotcoin)
  
+
+---
+
+**Building secure IoT device pipelines or supply chain audit trails?**
+
+→ [Consulting Services](https://www.novatechflow.com/p/consulting-services.html)  
+→ [Book a call](https://cal.com/alexanderalten)
